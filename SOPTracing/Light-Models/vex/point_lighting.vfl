@@ -1,0 +1,25 @@
+int prim;
+float u, v, d, lint, lexp;
+vector p, pCd, lP, lCd, L;
+
+int N = npoints(1);
+
+pCd = @Cd;
+@Cd = chv("../ambColor");
+float ncp = chf("../ncp");
+float fcp = chf("../fcp");
+
+for (int l = 0; l < N; l++){
+    /* light loop */
+    lP = point(1, "P", l);
+    L = normalize(lP - @P);
+    prim = intersect(0, @P + L*ncp, L*fcp, p, u, v);
+    if(prim == -1){
+        lCd = point(1, "Cd", l);
+        lint = point(1, "intensity", l);
+        lexp = point(1, "exposure", l);
+        d = distance(lP, @P);
+        d = exp(-d*d/12 + lexp);
+        @Cd += lint*d*dot(@N, L)*pCd*lCd;
+    }
+}
