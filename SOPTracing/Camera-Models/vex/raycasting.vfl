@@ -1,0 +1,13 @@
+@Cd = chv("../ambColor");
+
+float ncp = chf("../ncp");
+float fcp = chf("../fcp");
+
+int prim;
+float u, v;
+vector p;
+
+prim = intersect(1, @P + v@I*ncp, v@I*fcp, p, u, v);
+if(prim != -1){
+    @Cd = primuv(1, "Cd", prim, set(u, v, 0));
+}

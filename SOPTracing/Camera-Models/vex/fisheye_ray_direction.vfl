@@ -1,0 +1,23 @@
+float x, y, r, fov, phi, theta;
+vector bbmin, bbmax, bbsize, st;
+
+float _fov = chf("../../SOPTrace/fov");
+
+getbbox(0, bbmin, bbmax);
+bbsize = bbmax - bbmin;
+st = @P/max(bbsize);
+x = st.x*2; y = st.y*2;
+
+r = sqrt(x*x + y*y);
+fov = 2*$PI*_fov;
+phi = atan2(y, x);
+theta = r*(fov/2);
+
+v@I = set(  sin(theta)*cos(phi),
+            sin(theta)*sin(phi),
+            cos(theta));
+@I = normalize(@I);
+/*
+ray direction visualization
+*/
+@group_raydir = 0;

@@ -1,0 +1,22 @@
+/*
+Detail mode
+*/
+int pt;
+float tx, ty;
+vector vmin, vmax, P;
+
+int divx = chi("divx");
+int divy = chi("divy");
+
+getbbox(0, vmin, vmax);
+for(int i = 0; i < divx; i++){
+    for (int j = 0; j < divy; j++){
+        tx = (float)i/(divx - 1);
+        ty = (float)j/(divy - 1);
+        P = set(tx*vmin.x + (1 - tx)*vmax.x,
+                ty*vmin.y + (1 - ty)*vmax.y, 0);
+        pt = nearpoint(0, P, 10);
+        setattrib(0, "pointgroup", "raydir", pt, 0, 1);
+    }
+    
+}
