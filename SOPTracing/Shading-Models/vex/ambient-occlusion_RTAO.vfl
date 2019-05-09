@@ -1,0 +1,21 @@
+#include "utils.vfl"
+
+int prim;
+float u, v, hits;
+vector p;
+
+int samples = chi("../samples");
+float maxdist = chf("../maxdist");
+
+vector omega[];
+Hemisphere(@N, omega, samples, @ptnum);
+
+float hits = 0;
+foreach (vector ray; omega){
+    prim = intersect(0, @P + ray*0.0001, ray*maxdist, p, u, v);
+    if(prim != -1){
+        hits += 1;
+    }
+}
+
+@Cd *= 1 - hits/(float)samples;

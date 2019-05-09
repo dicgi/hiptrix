@@ -1,0 +1,19 @@
+#define PI 4*atan(1)
+#define PI2 8*atan(1)
+
+void Hemisphere(vector dir, omega[]; int n_samples, seed){
+    /*
+    Hemi-spherical sampling
+    */
+    vector vrand; 
+    int i = seed;
+    int index = len(omega);
+    while(len(omega) < n_samples){
+        vrand = rand(index*132 + i*234);
+        vrand = normalize(vrand*2 - 1);
+        if(dot(vrand, dir) >= 0){
+            omega[index] = vrand;
+            index++;
+        } i++;
+    }
+}

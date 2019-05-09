@@ -1,0 +1,30 @@
+@Cd = chv("../ambColor");
+
+float ncp = chf("../ncp");
+float fcp = chf("../fcp");
+
+float u, v;
+vector p;
+vector P = @P;
+float cum = 0;
+float density = 0;
+while(1){
+    int prim = intersect(1, P + v@I*ncp, v@I*fcp, p, u, v);
+    if(prim != -1){
+        vector N = primuv(1, "N", prim, set(u, v, 0));
+        float den = primuv(1, "density", prim, set(u, v, 0));
+        cum += length(p - P)*density;
+        density += dot(v@I, N) > 0.0 ? -den : den;
+        P = p;
+    }
+    else break;
+}
+
+@Cd += 1 - exp(-cum*cum/16);
+
+int prim = intersect(1, @P + v@I*ncp, v@I*fcp, p, u, v);
+
+if(prim != -1){
+    vector N = primuv(1, "N", prim, set(u, v, 0));
+    @Cd *= 1 - dot(-v@I, N)/2;
+}
