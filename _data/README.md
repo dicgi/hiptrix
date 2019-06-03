@@ -1,4 +1,4 @@
-# Conjunto de dados
+# Datasets
 ---
 
 Directory to store all datasets which will be used in projects. Here it'll be finded geometries, images, sounds, text files, spreadsheets and etc. All of them are in the public domain, freeby distributed or made by myself.
