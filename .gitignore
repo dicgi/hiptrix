@@ -8,4 +8,5 @@ __pycache__/
 
 ### Houdini ###
 backup/
+render/
 # *.vis.hipnc
